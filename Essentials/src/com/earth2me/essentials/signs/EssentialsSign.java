@@ -211,9 +211,9 @@ public class EssentialsSign {
         return true;
     }
 
-    protected static boolean checkIfBlockBreaksSigns(final IEssentials ess, final Block block) {
+    protected static boolean checkIfBlockBreaksSigns(final Block block) {
         final Block sign = block.getRelative(BlockFace.UP);
-        if (sign.getType() == Material.SIGN_POST && isValidSign(ess, new BlockSign(sign))) {
+        if (sign.getType() == Material.SIGN_POST && isValidSign(new BlockSign(sign))) {
             return true;
         }
         final BlockFace[] directions = new BlockFace[]{BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST};
@@ -222,7 +222,7 @@ public class EssentialsSign {
             if (signblock.getType() == Material.WALL_SIGN) {
                 try {
                     final org.bukkit.material.Sign signMat = (org.bukkit.material.Sign) signblock.getState().getData();
-                    if (signMat != null && signMat.getFacing() == blockFace && isValidSign(ess, new BlockSign(signblock))) {
+                    if (signMat != null && signMat.getFacing() == blockFace && isValidSign(new BlockSign(signblock))) {
                         return true;
                     }
                 } catch (NullPointerException ex) {
@@ -231,6 +231,12 @@ public class EssentialsSign {
             }
         }
         return false;
+    }
+
+    /** @deprecated, use {@link #isValidSign(IEssentials, ISign)} if possible */
+    @Deprecated
+    public static boolean isValidSign(final ISign sign) {
+        return sign.getLine(0).matches("§1\\[.*\\]");
     }
 
     public static boolean isValidSign(final IEssentials ess, final ISign sign) {
