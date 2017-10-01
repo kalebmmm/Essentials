@@ -507,6 +507,10 @@ commands:
     description: Calculates the worth of items in hand or as specified.
     usage: /<command> <<itemname>|<id>|hand|inventory|blocks> [-][amount]
     aliases: [eprice,price,eworth]
+  tpoff:
+    description: Teleport to the location of an offline player
+    usage: /<command> <player>
+    aliases: [etpoff, tpoffline, etpoffline]
 
 permissions:
   essentials.*:
